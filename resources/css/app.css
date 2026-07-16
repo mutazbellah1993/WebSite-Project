@@ -9,7 +9,7 @@
 
 @theme {
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Manrope', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
@@ -62,74 +62,74 @@
 }
 
 :root {
-    --background: #f8fafc;
-    --foreground: #0b1220;
+    --background: #f4f7fa;
+    --foreground: #0f172a;
     --card: #ffffff;
-    --card-foreground: #0b1220;
+    --card-foreground: #0f172a;
     --popover: #ffffff;
-    --popover-foreground: #0b1220;
-    --primary: #0b1f3a;
+    --popover-foreground: #0f172a;
+    --primary: #082d67;
     --primary-foreground: #ffffff;
-    --secondary: #e6f2f1;
-    --secondary-foreground: #0f3a3f;
-    --muted: #eef2f6;
-    --muted-foreground: #526173;
-    --accent: #0f766e;
+    --secondary: #f4f7fa;
+    --secondary-foreground: #061b3a;
+    --muted: #f4f7fa;
+    --muted-foreground: #475569;
+    --accent: #0aa6b5;
     --accent-foreground: #ffffff;
     --destructive: #b42318;
     --destructive-foreground: #ffffff;
-    --border: #d9e2ec;
-    --input: #d9e2ec;
-    --ring: #0f766e;
-    --chart-1: #0b1f3a;
-    --chart-2: #0f766e;
-    --chart-3: #38bdf8;
-    --chart-4: #64748b;
-    --chart-5: #c8a45d;
+    --border: #d8e2ec;
+    --input: #d8e2ec;
+    --ring: #0aa6b5;
+    --chart-1: #082d67;
+    --chart-2: #0aa6b5;
+    --chart-3: #22c7cf;
+    --chart-4: #475569;
+    --chart-5: #061b3a;
     --radius: 0.625rem;
     --sidebar: #ffffff;
-    --sidebar-foreground: #0b1220;
-    --sidebar-primary: #0b1f3a;
+    --sidebar-foreground: #0f172a;
+    --sidebar-primary: #082d67;
     --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #e6f2f1;
-    --sidebar-accent-foreground: #0f3a3f;
-    --sidebar-border: #d9e2ec;
-    --sidebar-ring: #0f766e;
+    --sidebar-accent: #f4f7fa;
+    --sidebar-accent-foreground: #061b3a;
+    --sidebar-border: #d8e2ec;
+    --sidebar-ring: #0aa6b5;
 }
 
 .dark {
-    --background: #07111f;
-    --foreground: #eef6ff;
-    --card: #0b1f3a;
-    --card-foreground: #eef6ff;
-    --popover: #0b1f3a;
-    --popover-foreground: #eef6ff;
-    --primary: #5eead4;
-    --primary-foreground: #06202a;
-    --secondary: #102a43;
-    --secondary-foreground: #d8f3ef;
-    --muted: #142b45;
-    --muted-foreground: #a8b7c7;
-    --accent: #14b8a6;
-    --accent-foreground: #052925;
+    --background: #061b3a;
+    --foreground: #ffffff;
+    --card: #082d67;
+    --card-foreground: #ffffff;
+    --popover: #082d67;
+    --popover-foreground: #ffffff;
+    --primary: #22c7cf;
+    --primary-foreground: #061b3a;
+    --secondary: #082d67;
+    --secondary-foreground: #ffffff;
+    --muted: #082d67;
+    --muted-foreground: #d7e4f2;
+    --accent: #22c7cf;
+    --accent-foreground: #061b3a;
     --destructive: #f87171;
-    --destructive-foreground: #2a0707;
-    --border: #1d3a5f;
-    --input: #1d3a5f;
-    --ring: #5eead4;
-    --chart-1: #5eead4;
-    --chart-2: #38bdf8;
-    --chart-3: #c8a45d;
-    --chart-4: #94a3b8;
-    --chart-5: #f87171;
-    --sidebar: #091827;
-    --sidebar-foreground: #eef6ff;
-    --sidebar-primary: #5eead4;
-    --sidebar-primary-foreground: #06202a;
-    --sidebar-accent: #102a43;
-    --sidebar-accent-foreground: #d8f3ef;
-    --sidebar-border: #1d3a5f;
-    --sidebar-ring: #5eead4;
+    --destructive-foreground: #061b3a;
+    --border: #164178;
+    --input: #164178;
+    --ring: #22c7cf;
+    --chart-1: #22c7cf;
+    --chart-2: #0aa6b5;
+    --chart-3: #ffffff;
+    --chart-4: #d7e4f2;
+    --chart-5: #082d67;
+    --sidebar: #061b3a;
+    --sidebar-foreground: #ffffff;
+    --sidebar-primary: #22c7cf;
+    --sidebar-primary-foreground: #061b3a;
+    --sidebar-accent: #082d67;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: #164178;
+    --sidebar-ring: #22c7cf;
 }
 
 @layer base {
@@ -139,5 +139,14 @@
 
     body {
         @apply bg-background text-foreground;
+        font-weight: 400;
+        text-rendering: geometricPrecision;
+    }
+
+    :lang(ar),
+    [dir='rtl'] {
+        font-family:
+            'IBM Plex Sans Arabic', 'Manrope', ui-sans-serif, system-ui, sans-serif,
+            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 }

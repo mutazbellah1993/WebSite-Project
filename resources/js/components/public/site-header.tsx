@@ -14,7 +14,7 @@ export function SiteHeader() {
     const path = page.url.split('?')[0] || '/';
 
     return (
-        <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+        <header className="sticky top-0 z-50 border-b border-[#D8E2EC] bg-white/95 shadow-sm shadow-[#061B3A]/5 backdrop-blur">
             <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-5 sm:px-6 lg:px-8">
                 <BrandLogo />
                 <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
@@ -28,8 +28,8 @@ export function SiteHeader() {
                                 className={cn(
                                     'rounded-md px-3 py-2 text-sm font-medium transition',
                                     active
-                                        ? 'bg-teal-50 text-teal-800'
-                                        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950',
+                                        ? 'bg-[#E7F8FA] text-[#0AA6B5]'
+                                        : 'text-[#0F172A] hover:bg-[#F4F7FA] hover:text-[#0AA6B5]',
                                 )}
                                 aria-current={active ? 'page' : undefined}
                             >
@@ -42,14 +42,14 @@ export function SiteHeader() {
                     <LanguageSwitcher />
                     <Link
                         href="/request-a-study"
-                        className="rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus:ring-3 focus:ring-teal-200"
+                        className="rounded-md bg-[#082D67] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#0AA6B5] focus:outline-none focus:ring-3 focus:ring-[#22C7CF]/35"
                     >
                         {locale === 'ar' ? 'طلب دراسة' : 'Request'}
                     </Link>
                 </div>
                 <button
                     type="button"
-                    className="inline-flex size-11 items-center justify-center rounded-md border border-slate-200 text-slate-700 lg:hidden"
+                    className="inline-flex size-11 items-center justify-center rounded-md border border-[#D8E2EC] text-[#082D67] transition hover:border-[#0AA6B5] hover:text-[#0AA6B5] lg:hidden"
                     onClick={() => setOpen((value) => !value)}
                     aria-expanded={open}
                     aria-controls="mobile-navigation"
@@ -59,13 +59,13 @@ export function SiteHeader() {
                 </button>
             </div>
             {open ? (
-                <div id="mobile-navigation" className="border-t border-slate-200 bg-white px-5 py-5 shadow-lg lg:hidden">
+                <div id="mobile-navigation" className="border-t border-[#D8E2EC] bg-white px-5 py-5 shadow-lg lg:hidden">
                     <nav className="grid gap-2" aria-label="Mobile navigation">
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className="rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-100"
+                                className="rounded-md px-3 py-3 text-base font-semibold text-[#0F172A] transition hover:bg-[#F4F7FA] hover:text-[#0AA6B5]"
                                 onClick={() => setOpen(false)}
                             >
                                 {text(item.label, locale)}

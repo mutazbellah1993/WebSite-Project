@@ -90,7 +90,7 @@ export default function RequestStudy() {
                             ar: 'لا تحتاج إلى منهجية مكتملة قبل التواصل. يكفي وجود سؤال واضح والجمهور المتوقع وطريقة استخدام النتائج لبدء النقاش.',
                         }}
                     />
-                    <form onSubmit={submit} className="rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm">
+                    <form onSubmit={submit} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6 shadow-sm">
                         <input
                             type="text"
                             name="website"
@@ -250,10 +250,10 @@ export default function RequestStudy() {
                                 onChange={(event) => form.setData('consent', event.target.checked)}
                                 aria-invalid={Boolean(form.errors.consent)}
                                 aria-describedby={form.errors.consent ? 'consent-error' : undefined}
-                                className="mt-1 size-4 rounded border-slate-300 text-teal-700 focus:ring-teal-700"
+                                className="mt-1 size-4 rounded border-[#D8E2EC] text-[#0AA6B5] focus:ring-[#0AA6B5]"
                             />
                             <div>
-                                <label htmlFor="consent" className="text-sm leading-6 text-slate-700">
+                                <label htmlFor="consent" className="text-sm font-normal leading-6 text-[#475569]">
                                     {currentLocale === 'ar'
                                         ? 'أوافق على استخدام هذه المعلومات للرد على طلب الدراسة.'
                                         : 'I agree that this information may be used to respond to this study request.'}
@@ -268,7 +268,7 @@ export default function RequestStudy() {
                         <button
                             type="submit"
                             disabled={form.processing}
-                            className="mt-7 inline-flex items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
+                            className="mt-7 inline-flex items-center justify-center gap-2 rounded-md bg-[#082D67] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#0AA6B5] disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             <Send className="size-4" aria-hidden="true" />
                             {form.processing

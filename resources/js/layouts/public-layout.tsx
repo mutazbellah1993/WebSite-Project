@@ -11,7 +11,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 
     return (
         <InertiaAwareProviders>
-            <div className={cn('min-h-screen bg-slate-50 text-slate-950', locale.direction === 'rtl' && 'text-right')}>
+            <div className={cn('min-h-screen bg-[#F4F7FA] text-[#0F172A]', locale.direction === 'rtl' && 'text-right')}>
                 <SiteHeader />
                 <main>{children}</main>
                 <SiteFooter />

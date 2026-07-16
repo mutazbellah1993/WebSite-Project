@@ -13,8 +13,11 @@ export default defineConfig({
             ssr: 'resources/js/ssr.tsx',
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('Manrope', {
+                    weights: [400, 500, 600, 700, 800],
+                }),
+                bunny('IBM Plex Sans Arabic', {
+                    weights: [400, 500, 600, 700, 800],
                 }),
             ],
         }),

@@ -47,12 +47,12 @@ export default function Industries() {
                             const Icon = icons[index] ?? Building2;
 
                             return (
-                                <article key={industry.title.en} className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-                                    <div className="mb-5 flex size-12 items-center justify-center rounded-md bg-white text-teal-700 ring-1 ring-slate-200">
+                                <article key={industry.title.en} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6">
+                                    <div className="mb-5 flex size-12 items-center justify-center rounded-md bg-white text-[#0AA6B5] ring-1 ring-[#D8E2EC]">
                                         <Icon className="size-6" aria-hidden="true" />
                                     </div>
-                                    <h3 className="text-lg font-semibold text-slate-950">{text(industry.title, currentLocale)}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-slate-600">{text(industry.description, currentLocale)}</p>
+                                    <h3 className="text-lg font-bold text-[#0F172A]">{text(industry.title, currentLocale)}</h3>
+                                    <p className="mt-3 text-sm font-normal leading-6 text-[#475569]">{text(industry.description, currentLocale)}</p>
                                 </article>
                             );
                         })}
@@ -60,7 +60,7 @@ export default function Industries() {
                 </div>
             </section>
 
-            <section className="bg-slate-50 px-5 py-18 sm:px-6 lg:px-8">
+            <section className="bg-[#F4F7FA] px-5 py-18 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
                     <SectionHeading
                         locale={currentLocale}
@@ -83,7 +83,7 @@ export default function Industries() {
                                 ar: 'كيف يمكن إيصال النتائج بوضوح لصناع القرار؟',
                             },
                         ].map((question) => (
-                            <article key={question.en} className="rounded-lg bg-white p-6 text-base font-semibold leading-7 text-slate-800 ring-1 ring-slate-200">
+                            <article key={question.en} className="rounded-lg bg-white p-6 text-base font-bold leading-7 text-[#0F172A] ring-1 ring-[#D8E2EC]">
                                 {text(question, currentLocale)}
                             </article>
                         ))}

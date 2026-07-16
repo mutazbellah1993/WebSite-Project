@@ -70,17 +70,17 @@ export default function About() {
                     />
                     <div className="grid gap-4">
                         {principles.map((principle) => (
-                            <article key={principle.title.en} className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-                                <CheckCircle2 className="mb-4 size-6 text-teal-700" aria-hidden="true" />
-                                <h3 className="font-semibold text-slate-950">{text(principle.title, currentLocale)}</h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">{text(principle.description, currentLocale)}</p>
+                            <article key={principle.title.en} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6">
+                                <CheckCircle2 className="mb-4 size-6 text-[#0AA6B5]" aria-hidden="true" />
+                                <h3 className="font-bold text-[#0F172A]">{text(principle.title, currentLocale)}</h3>
+                                <p className="mt-3 text-sm font-normal leading-6 text-[#475569]">{text(principle.description, currentLocale)}</p>
                             </article>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="bg-slate-50 px-5 py-18 sm:px-6 lg:px-8">
+            <section className="bg-[#F4F7FA] px-5 py-18 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
                     <SectionHeading
                         locale={currentLocale}
@@ -90,9 +90,9 @@ export default function About() {
                     />
                     <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                         {methodology.map((step) => (
-                            <article key={step.title.en} className="rounded-lg bg-white p-6 ring-1 ring-slate-200">
-                                <h3 className="font-semibold text-slate-950">{text(step.title, currentLocale)}</h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">{text(step.description, currentLocale)}</p>
+                            <article key={step.title.en} className="rounded-lg bg-white p-6 ring-1 ring-[#D8E2EC]">
+                                <h3 className="font-bold text-[#0F172A]">{text(step.title, currentLocale)}</h3>
+                                <p className="mt-3 text-sm font-normal leading-6 text-[#475569]">{text(step.description, currentLocale)}</p>
                             </article>
                         ))}
                     </div>

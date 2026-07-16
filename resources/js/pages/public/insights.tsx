@@ -51,10 +51,10 @@ export default function Insights() {
                             const Icon = icons[index] ?? BookOpenCheck;
 
                             return (
-                                <article key={insight.title.en} className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-                                    <Icon className="mb-5 size-7 text-teal-700" aria-hidden="true" />
-                                    <h3 className="text-lg font-semibold text-slate-950">{text(insight.title, currentLocale)}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-slate-600">{text(insight.description, currentLocale)}</p>
+                                <article key={insight.title.en} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6">
+                                    <Icon className="mb-5 size-7 text-[#0AA6B5]" aria-hidden="true" />
+                                    <h3 className="text-lg font-bold text-[#0F172A]">{text(insight.title, currentLocale)}</h3>
+                                    <p className="mt-3 text-sm font-normal leading-6 text-[#475569]">{text(insight.description, currentLocale)}</p>
                                 </article>
                             );
                         })}
@@ -62,7 +62,7 @@ export default function Insights() {
                 </div>
             </section>
 
-            <section className="bg-slate-50 px-5 py-18 sm:px-6 lg:px-8">
+            <section className="bg-[#F4F7FA] px-5 py-18 sm:px-6 lg:px-8">
                 <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
                     <SectionHeading
                         locale={currentLocale}
@@ -73,13 +73,13 @@ export default function Insights() {
                             ar: 'يجب أن يوضح المحتوى البحثي نطاقه وسياق مصادره ومنهجيته وقيوده والاستخدام المقصود قبل النشر.',
                         }}
                     />
-                    <div className="rounded-lg border border-slate-200 bg-white p-6">
-                        <ul className="grid gap-4 text-sm leading-6 text-slate-700">
+                    <div className="rounded-lg border border-[#D8E2EC] bg-white p-6">
+                        <ul className="grid gap-4 text-sm font-normal leading-6 text-[#475569]">
                             {(currentLocale === 'ar'
                                 ? ['توضيح نطاق التحليل ومصدر البيانات.', 'فصل النتائج عن التوصيات بوضوح.', 'ذكر القيود والتحفظات عند الحاجة.', 'تجنب الأرقام أو الادعاءات غير الموثقة.']
                                 : ['State the analysis scope and data source context.', 'Separate findings from recommendations clearly.', 'Name limitations and caveats when needed.', 'Avoid undocumented figures or unsupported claims.']
                             ).map((item) => (
-                                <li key={item} className="rounded-md bg-slate-50 p-4 font-medium">
+                                <li key={item} className="rounded-md bg-[#F4F7FA] p-4 font-medium">
                                     {item}
                                 </li>
                             ))}

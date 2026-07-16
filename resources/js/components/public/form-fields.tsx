@@ -37,9 +37,9 @@ type TextareaFieldProps = BaseFieldProps &
 
 function FieldLabel({ id, label, locale, required }: Pick<BaseFieldProps, 'id' | 'label' | 'locale' | 'required'>) {
     return (
-        <label htmlFor={id} className="text-sm font-semibold text-slate-800">
+        <label htmlFor={id} className="text-sm font-bold text-[#0F172A]">
             {text(label, locale)}
-            {required ? <span className="text-teal-700"> *</span> : null}
+            {required ? <span className="text-[#0AA6B5]"> *</span> : null}
         </label>
     );
 }
@@ -110,8 +110,8 @@ export function SelectField({
                 aria-invalid={Boolean(error)}
                 aria-describedby={error ? `${id}-error` : undefined}
                 className={cn(
-                    'h-11 rounded-md border border-input bg-white px-3 text-base text-slate-900 shadow-xs outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm',
-                    !value && 'text-slate-500',
+                    'h-11 rounded-md border border-input bg-white px-3 text-base text-[#0F172A] shadow-xs outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm',
+                    !value && 'text-[#475569]',
                 )}
             >
                 <option value="">{text(placeholder, locale)}</option>
@@ -149,7 +149,7 @@ export function TextareaField({
                 onChange={onChange}
                 aria-invalid={Boolean(error)}
                 aria-describedby={error ? `${id}-error` : undefined}
-                className="min-h-36 rounded-md border border-input bg-white px-3 py-2 text-base text-slate-900 shadow-xs outline-none transition placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
+                className="min-h-36 rounded-md border border-input bg-white px-3 py-2 text-base text-[#0F172A] shadow-xs outline-none transition placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
             />
             <FieldError id={id} error={error} />
         </div>

@@ -20,7 +20,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
     return (
         <div
             className={cn(
-                'inline-flex items-center rounded-full border border-slate-200 bg-white p-1 shadow-sm',
+                'inline-flex items-center rounded-full border border-[#D8E2EC] bg-white p-1 shadow-sm',
                 compact && 'w-full justify-center',
             )}
             aria-label="Language switcher"
@@ -33,8 +33,8 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
                     className={cn(
                         'min-w-10 rounded-full px-3 py-1.5 text-center text-sm font-semibold transition',
                         currentLocale === locale
-                            ? 'bg-teal-700 text-white'
-                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950',
+                            ? 'bg-[#082D67] text-white'
+                            : 'text-[#475569] hover:bg-[#F4F7FA] hover:text-[#0AA6B5]',
                     )}
                     aria-current={currentLocale === locale ? 'true' : undefined}
                 >

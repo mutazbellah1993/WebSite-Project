@@ -76,16 +76,16 @@ export default function Contact() {
                                 ar: 'استخدم هذا النموذج للأسئلة العامة أو نقاشات التعاون أو المتابعة حول خدمات إيليت داتا.',
                             }}
                         />
-                        <div className="mt-8 rounded-lg bg-slate-50 p-6 ring-1 ring-slate-200">
-                            <MailCheck className="mb-4 size-7 text-teal-700" aria-hidden="true" />
-                            <p className="text-sm leading-6 text-slate-600">
+                        <div className="mt-8 rounded-lg bg-[#F4F7FA] p-6 ring-1 ring-[#D8E2EC]">
+                            <MailCheck className="mb-4 size-7 text-[#0AA6B5]" aria-hidden="true" />
+                            <p className="text-sm font-normal leading-6 text-[#475569]">
                                 {currentLocale === 'ar'
                                     ? 'يمكن إضافة البريد الرسمي ورقم الهاتف وعنوان المكتب بعد تأكيد بيانات الاتصال النهائية قبل الإطلاق.'
                                     : 'Official email, phone number, and office address can be added after final contact details are confirmed before launch.'}
                             </p>
                         </div>
                     </div>
-                    <form onSubmit={submit} className="rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm">
+                    <form onSubmit={submit} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6 shadow-sm">
                         <input
                             type="text"
                             name="website"
@@ -172,10 +172,10 @@ export default function Contact() {
                                 onChange={(event) => form.setData('consent', event.target.checked)}
                                 aria-invalid={Boolean(form.errors.consent)}
                                 aria-describedby={form.errors.consent ? 'contact-consent-error' : undefined}
-                                className="mt-1 size-4 rounded border-slate-300 text-teal-700 focus:ring-teal-700"
+                                className="mt-1 size-4 rounded border-[#D8E2EC] text-[#0AA6B5] focus:ring-[#0AA6B5]"
                             />
                             <div>
-                                <label htmlFor="contact-consent" className="text-sm leading-6 text-slate-700">
+                                <label htmlFor="contact-consent" className="text-sm font-normal leading-6 text-[#475569]">
                                     {currentLocale === 'ar'
                                         ? 'أوافق على استخدام هذه المعلومات للرد على رسالتي.'
                                         : 'I agree that this information may be used to respond to my message.'}
@@ -190,7 +190,7 @@ export default function Contact() {
                         <button
                             type="submit"
                             disabled={form.processing}
-                            className="mt-7 inline-flex items-center justify-center gap-2 rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
+                            className="mt-7 inline-flex items-center justify-center gap-2 rounded-md bg-[#082D67] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#0AA6B5] disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             <Send className="size-4" aria-hidden="true" />
                             {form.processing

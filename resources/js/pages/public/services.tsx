@@ -56,7 +56,7 @@ export default function Services() {
                 </div>
             </section>
 
-            <section className="bg-slate-50 px-5 py-18 sm:px-6 lg:px-8">
+            <section className="bg-[#F4F7FA] px-5 py-18 sm:px-6 lg:px-8">
                 <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
                     <SectionHeading
                         locale={currentLocale}
@@ -67,12 +67,12 @@ export default function Services() {
                             ar: 'يمكن أن يكون كل مشروع محدودا وفنيا أو شاملا من البداية إلى النهاية، حسب قدرات المؤسسة وبياناتها المتاحة واحتياجات التقارير.',
                         }}
                     />
-                    <div className="rounded-lg border border-slate-200 bg-white p-6">
+                    <div className="rounded-lg border border-[#D8E2EC] bg-white p-6">
                         <ul className="grid gap-4">
                             {delivery.map((item) => (
                                 <li key={item.en} className="flex gap-3">
-                                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-teal-700" aria-hidden="true" />
-                                    <span className="text-sm font-medium text-slate-700">{text(item, currentLocale)}</span>
+                                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#0AA6B5]" aria-hidden="true" />
+                                    <span className="text-sm font-medium text-[#475569]">{text(item, currentLocale)}</span>
                                 </li>
                             ))}
                         </ul>
