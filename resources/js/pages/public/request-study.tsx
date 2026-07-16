@@ -5,18 +5,24 @@ import { TextField, SelectField, TextareaField } from '@/components/public/form-
 import { PageHero } from '@/components/public/page-hero';
 import { SectionHeading } from '@/components/public/section-heading';
 import { SeoHead } from '@/components/public/seo-head';
-import { sectorOptions, serviceOptions } from '@/lib/public-content';
+import { clientTypeOptions, serviceOptions } from '@/lib/public-content';
 import type { SharedPageProps } from '@/types';
 
 type StudyForm = {
     organization: string;
-    name: string;
+    full_name: string;
     email: string;
     phone: string;
-    sector: string;
-    service_interest: string;
-    timeline: string;
-    message: string;
+    job_title: string;
+    client_type: string;
+    service_type: string;
+    study_title: string;
+    project_description: string;
+    objectives: string;
+    target_population: string;
+    geographic_scope: string;
+    desired_start_date: string;
+    desired_end_date: string;
     consent: boolean;
     website: string;
 };
@@ -26,13 +32,19 @@ export default function RequestStudy() {
     const currentLocale = locale.current;
     const form = useForm<StudyForm>({
         organization: '',
-        name: '',
+        full_name: '',
         email: '',
         phone: '',
-        sector: '',
-        service_interest: '',
-        timeline: '',
-        message: '',
+        job_title: '',
+        client_type: '',
+        service_type: '',
+        study_title: '',
+        project_description: '',
+        objectives: '',
+        target_population: '',
+        geographic_scope: '',
+        desired_start_date: '',
+        desired_end_date: '',
         consent: false,
         website: '',
     });
@@ -99,12 +111,12 @@ export default function RequestStudy() {
                                 required
                             />
                             <TextField
-                                id="name"
+                                id="full_name"
                                 label={{ en: 'Contact name', ar: 'اسم جهة التواصل' }}
                                 locale={currentLocale}
-                                value={form.data.name}
-                                onChange={(event) => form.setData('name', event.target.value)}
-                                error={form.errors.name}
+                                value={form.data.full_name}
+                                onChange={(event) => form.setData('full_name', event.target.value)}
+                                error={form.errors.full_name}
                                 autoComplete="name"
                                 required
                             />
@@ -128,51 +140,105 @@ export default function RequestStudy() {
                                 onChange={(event) => form.setData('phone', event.target.value)}
                                 error={form.errors.phone}
                             />
-                            <SelectField
-                                id="sector"
-                                label={{ en: 'Sector', ar: 'القطاع' }}
+                            <TextField
+                                id="job_title"
+                                label={{ en: 'Job title', ar: 'المسمى الوظيفي' }}
                                 locale={currentLocale}
-                                value={form.data.sector}
-                                placeholder={{ en: 'Select a sector', ar: 'اختر القطاع' }}
-                                options={sectorOptions}
-                                onChange={(event) => form.setData('sector', event.target.value)}
-                                error={form.errors.sector}
+                                value={form.data.job_title}
+                                onChange={(event) => form.setData('job_title', event.target.value)}
+                                error={form.errors.job_title}
+                            />
+                            <SelectField
+                                id="client_type"
+                                label={{ en: 'Client type', ar: 'نوع الجهة' }}
+                                locale={currentLocale}
+                                value={form.data.client_type}
+                                placeholder={{ en: 'Select a client type', ar: 'اختر نوع الجهة' }}
+                                options={clientTypeOptions}
+                                onChange={(event) => form.setData('client_type', event.target.value)}
+                                error={form.errors.client_type}
                                 required
                             />
                             <SelectField
-                                id="service_interest"
+                                id="service_type"
                                 label={{ en: 'Service interest', ar: 'الخدمة المطلوبة' }}
                                 locale={currentLocale}
-                                value={form.data.service_interest}
+                                value={form.data.service_type}
                                 placeholder={{ en: 'Select a service', ar: 'اختر الخدمة' }}
                                 options={serviceOptions}
-                                onChange={(event) => form.setData('service_interest', event.target.value)}
-                                error={form.errors.service_interest}
+                                onChange={(event) => form.setData('service_type', event.target.value)}
+                                error={form.errors.service_type}
                                 required
                             />
                             <TextField
-                                id="timeline"
-                                label={{ en: 'Preferred timeline', ar: 'الجدول الزمني المفضل' }}
+                                id="study_title"
+                                label={{ en: 'Study title', ar: 'عنوان الدراسة' }}
                                 locale={currentLocale}
-                                value={form.data.timeline}
-                                onChange={(event) => form.setData('timeline', event.target.value)}
-                                error={form.errors.timeline}
-                                placeholder={{ en: 'Example: within two months', ar: 'مثال: خلال شهرين' }}
+                                value={form.data.study_title}
+                                onChange={(event) => form.setData('study_title', event.target.value)}
+                                error={form.errors.study_title}
+                                placeholder={{ en: 'Example: beneficiary needs assessment', ar: 'مثال: تقييم احتياجات المستفيدين' }}
                             />
                         </div>
                         <div className="mt-5">
                             <TextareaField
-                                id="message"
+                                id="project_description"
                                 label={{ en: 'Research question or study need', ar: 'السؤال البحثي أو احتياج الدراسة' }}
                                 locale={currentLocale}
-                                value={form.data.message}
-                                onChange={(event) => form.setData('message', event.target.value)}
-                                error={form.errors.message}
+                                value={form.data.project_description}
+                                onChange={(event) => form.setData('project_description', event.target.value)}
+                                error={form.errors.project_description}
                                 placeholder={{
                                     en: 'Describe what you need to learn, the audience for the findings, and any data already available.',
                                     ar: 'صف ما تحتاج إلى معرفته، والجمهور المستهدف من النتائج، وأي بيانات متاحة حاليا.',
                                 }}
                                 required
+                            />
+                        </div>
+                        <div className="mt-5 grid gap-5 md:grid-cols-2">
+                            <TextareaField
+                                id="objectives"
+                                label={{ en: 'Objectives', ar: 'الأهداف' }}
+                                locale={currentLocale}
+                                value={form.data.objectives}
+                                rows={4}
+                                onChange={(event) => form.setData('objectives', event.target.value)}
+                                error={form.errors.objectives}
+                            />
+                            <TextareaField
+                                id="target_population"
+                                label={{ en: 'Target population', ar: 'الفئة المستهدفة' }}
+                                locale={currentLocale}
+                                value={form.data.target_population}
+                                rows={4}
+                                onChange={(event) => form.setData('target_population', event.target.value)}
+                                error={form.errors.target_population}
+                            />
+                            <TextField
+                                id="geographic_scope"
+                                label={{ en: 'Geographic scope', ar: 'النطاق الجغرافي' }}
+                                locale={currentLocale}
+                                value={form.data.geographic_scope}
+                                onChange={(event) => form.setData('geographic_scope', event.target.value)}
+                                error={form.errors.geographic_scope}
+                            />
+                            <TextField
+                                id="desired_start_date"
+                                label={{ en: 'Desired start date', ar: 'تاريخ البدء المفضل' }}
+                                locale={currentLocale}
+                                value={form.data.desired_start_date}
+                                type="date"
+                                onChange={(event) => form.setData('desired_start_date', event.target.value)}
+                                error={form.errors.desired_start_date}
+                            />
+                            <TextField
+                                id="desired_end_date"
+                                label={{ en: 'Desired end date', ar: 'تاريخ الانتهاء المفضل' }}
+                                locale={currentLocale}
+                                value={form.data.desired_end_date}
+                                type="date"
+                                onChange={(event) => form.setData('desired_end_date', event.target.value)}
+                                error={form.errors.desired_end_date}
                             />
                         </div>
                         <div className="mt-5 flex items-start gap-3">

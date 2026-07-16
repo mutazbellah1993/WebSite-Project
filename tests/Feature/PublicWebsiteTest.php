@@ -2,7 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\PublicInquiry;
+use App\Models\Inquiry;
+use App\Models\StudyRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -38,22 +39,32 @@ class PublicWebsiteTest extends TestCase
     {
         $this->post(route('request-study.submit'), [
             'organization' => 'Research Organization',
-            'name' => 'Analyst Name',
+            'full_name' => 'Analyst Name',
             'email' => 'analyst@example.test',
             'phone' => '+963000000000',
-            'sector' => 'ngos-and-development-programs',
-            'service_interest' => 'monitoring-evaluation',
-            'timeline' => 'Within two months',
-            'message' => 'We need support designing a monitoring and evaluation study for a program.',
+            'job_title' => 'Monitoring Officer',
+            'client_type' => 'ngo',
+            'service_type' => 'monitoring-evaluation',
+            'study_title' => 'Program evaluation',
+            'project_description' => 'We need support designing a monitoring and evaluation study for a program.',
+            'objectives' => 'Clarify program outcomes and learning needs.',
+            'target_population' => 'Program participants',
+            'geographic_scope' => 'Syria',
+            'desired_start_date' => '2026-08-01',
+            'desired_end_date' => '2026-09-15',
             'consent' => '1',
         ])->assertRedirect();
 
-        $this->assertDatabaseHas('public_inquiries', [
-            'type' => PublicInquiry::TYPE_STUDY_REQUEST,
+        $this->assertDatabaseHas('study_requests', [
             'organization' => 'Research Organization',
             'email' => 'analyst@example.test',
-            'service_interest' => 'monitoring-evaluation',
+            'full_name' => 'Analyst Name',
+            'client_type' => 'ngo',
+            'service_type' => 'monitoring-evaluation',
+            'preferred_language' => 'en',
         ]);
+
+        $this->assertNotNull(StudyRequest::query()->first()?->request_number);
     }
 
     public function test_contact_message_can_be_submitted(): void
@@ -68,10 +79,13 @@ class PublicWebsiteTest extends TestCase
             'consent' => '1',
         ])->assertRedirect();
 
-        $this->assertDatabaseHas('public_inquiries', [
-            'type' => PublicInquiry::TYPE_CONTACT_MESSAGE,
+        $this->assertDatabaseHas('inquiries', [
             'email' => 'contact@example.test',
             'subject' => 'general-inquiry',
+            'preferred_language' => 'en',
+            'source' => 'website',
         ]);
+
+        $this->assertSame('Contact Person', Inquiry::query()->first()?->name);
     }
 }

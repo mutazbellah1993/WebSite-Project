@@ -19,7 +19,7 @@ class StoreContactMessageRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:140'],
             'email' => ['required', 'email:rfc', 'max:180'],
-            'phone' => ['nullable', 'string', 'max:80'],
+            'phone' => ['nullable', 'string', 'max:30'],
             'organization' => ['nullable', 'string', 'max:180'],
             'subject' => ['required', 'string', 'max:180'],
             'message' => ['required', 'string', 'min:15', 'max:3000'],

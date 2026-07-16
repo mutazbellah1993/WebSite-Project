@@ -227,6 +227,16 @@ export const serviceOptions = services.map((service) => ({
     label: service.title,
 }));
 
+export const clientTypeOptions = [
+    { value: 'business', label: { en: 'Business or private organization', ar: 'شركة أو مؤسسة خاصة' } },
+    { value: 'ngo', label: { en: 'NGO or development program', ar: 'منظمة أو برنامج تنموي' } },
+    { value: 'government', label: { en: 'Public or institutional program', ar: 'برنامج عام أو مؤسسي' } },
+    { value: 'university', label: { en: 'University or academic institution', ar: 'جامعة أو مؤسسة أكاديمية' } },
+    { value: 'researcher', label: { en: 'Researcher', ar: 'باحث' } },
+    { value: 'individual', label: { en: 'Individual', ar: 'فرد' } },
+    { value: 'other', label: { en: 'Other', ar: 'أخرى' } },
+];
+
 export function text(value: LocalizedText, locale: LocaleCode): string {
     return value[locale] ?? value.en;
 }
