@@ -24,6 +24,10 @@ class SetLocale
 
         App::setLocale($locale);
 
+        if ($request->query('locale') === $locale) {
+            cookie()->queue(cookie('locale', $locale, 60 * 24 * 365, null, null, false, false, false, 'lax'));
+        }
+
         return $next($request);
     }
 }
