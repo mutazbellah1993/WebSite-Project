@@ -37,7 +37,7 @@ class PublicWebsiteTest extends TestCase
 
     public function test_study_request_can_be_submitted(): void
     {
-        $this->post(route('request-study.submit'), [
+        $this->withCookie('locale', 'en')->post(route('request-study.submit'), [
             'organization' => 'Research Organization',
             'full_name' => 'Analyst Name',
             'email' => 'analyst@example.test',
@@ -69,7 +69,7 @@ class PublicWebsiteTest extends TestCase
 
     public function test_contact_message_can_be_submitted(): void
     {
-        $this->post(route('contact.submit'), [
+        $this->withCookie('locale', 'en')->post(route('contact.submit'), [
             'name' => 'Contact Person',
             'email' => 'contact@example.test',
             'phone' => '+963000000001',
