@@ -35,6 +35,42 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('admin.dashboard', absolute: false));
     }
 
+    public function test_successful_login_regenerates_the_session_id(): void
+    {
+        $user = User::factory()->create([
+            'role' => 'admin',
+            'is_active' => true,
+        ]);
+
+        $this->withSession(['auth_audit' => 'before-login']);
+        $this->get(route('login'));
+
+        $previousSessionId = session()->getId();
+
+        $this->post(route('login.store'), [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $this->assertNotSame($previousSessionId, session()->getId());
+    }
+
+    public function test_inactive_users_cannot_authenticate(): void
+    {
+        $user = User::factory()->create([
+            'role' => 'admin',
+            'is_active' => false,
+        ]);
+
+        $this->post(route('login.store'), [
+            'email' => $user->email,
+            'password' => 'password',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
+
     public function test_authenticated_users_are_redirected_from_login_to_admin_dashboard()
     {
         $user = User::factory()->create([

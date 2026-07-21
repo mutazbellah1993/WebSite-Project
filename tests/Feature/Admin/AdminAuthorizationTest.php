@@ -29,6 +29,21 @@ class AdminAuthorizationTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_users_without_an_admin_role_are_forbidden(): void
+    {
+        $user = new User([
+            'name' => 'Research User',
+            'email' => 'researcher@example.test',
+            'role' => 'researcher',
+            'is_active' => true,
+        ]);
+        $user->id = 999;
+
+        $this->actingAs($user)
+            ->get(route('admin.dashboard'))
+            ->assertForbidden();
+    }
+
     public function test_active_admin_roles_can_access_admin_dashboard(): void
     {
         foreach (User::ADMIN_ROLES as $role) {
