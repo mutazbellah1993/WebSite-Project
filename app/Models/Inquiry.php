@@ -27,6 +27,8 @@ class Inquiry extends Model
 {
     use SoftDeletes;
 
+    public const STATUSES = ['new', 'in_progress', 'resolved', 'spam'];
+
     protected function casts(): array
     {
         return [

@@ -38,6 +38,18 @@ class StudyRequest extends Model
 {
     use SoftDeletes;
 
+    public const STATUSES = [
+        'new',
+        'reviewing',
+        'clarification_needed',
+        'proposal_sent',
+        'accepted',
+        'rejected',
+        'closed',
+    ];
+
+    public const CLIENT_TYPES = ['business', 'ngo', 'government', 'university', 'researcher', 'individual', 'other'];
+
     protected function casts(): array
     {
         return [

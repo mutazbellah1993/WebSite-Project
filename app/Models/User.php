@@ -40,6 +40,10 @@ class User extends Authenticatable implements PasskeyUser
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
 
+    public const ADMIN_ROLES = ['super_admin', 'admin', 'editor', 'viewer'];
+
+    public const LEAD_MANAGER_ROLES = ['super_admin', 'admin', 'editor'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -70,6 +74,16 @@ class User extends Authenticatable implements PasskeyUser
     public function assignedStudyRequests(): HasMany
     {
         return $this->hasMany(StudyRequest::class, 'assigned_to');
+    }
+
+    public function canAccessAdmin(): bool
+    {
+        return $this->is_active && in_array($this->role, self::ADMIN_ROLES, true);
+    }
+
+    public function canManageLeads(): bool
+    {
+        return $this->is_active && in_array($this->role, self::LEAD_MANAGER_ROLES, true);
     }
 
     /**

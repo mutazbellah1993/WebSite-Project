@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InquiryController;
+use App\Http\Controllers\Admin\StudyRequestController;
 use App\Http\Controllers\PublicLeadController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +19,40 @@ Route::post('/contact-us', [PublicLeadController::class, 'storeContactMessage'])
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
 });
+
+Route::middleware(['auth', 'verified', 'admin.access'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function (): void {
+        Route::get('/', DashboardController::class)->name('dashboard');
+
+        Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
+        Route::get('/inquiries/{inquiry}', [InquiryController::class, 'show'])->withTrashed()->name('inquiries.show');
+        Route::patch('/inquiries/{inquiry}', [InquiryController::class, 'update'])
+            ->middleware('throttle:admin-actions')
+            ->name('inquiries.update');
+        Route::delete('/inquiries/{inquiry}', [InquiryController::class, 'destroy'])
+            ->middleware('throttle:admin-actions')
+            ->name('inquiries.destroy');
+        Route::patch('/inquiries/{inquiry}/restore', [InquiryController::class, 'restore'])
+            ->withTrashed()
+            ->middleware('throttle:admin-actions')
+            ->name('inquiries.restore');
+
+        Route::get('/study-requests', [StudyRequestController::class, 'index'])->name('study-requests.index');
+        Route::get('/study-requests/{studyRequest}', [StudyRequestController::class, 'show'])
+            ->withTrashed()
+            ->name('study-requests.show');
+        Route::patch('/study-requests/{studyRequest}', [StudyRequestController::class, 'update'])
+            ->middleware('throttle:admin-actions')
+            ->name('study-requests.update');
+        Route::delete('/study-requests/{studyRequest}', [StudyRequestController::class, 'destroy'])
+            ->middleware('throttle:admin-actions')
+            ->name('study-requests.destroy');
+        Route::patch('/study-requests/{studyRequest}/restore', [StudyRequestController::class, 'restore'])
+            ->withTrashed()
+            ->middleware('throttle:admin-actions')
+            ->name('study-requests.restore');
+    });
 
 require __DIR__.'/settings.php';
