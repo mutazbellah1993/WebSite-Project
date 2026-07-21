@@ -33,6 +33,58 @@ export type StudyRequestStatus =
 
 export type ContentStatus = 'draft' | 'published' | 'archived';
 
+export type InsightType = 'article' | 'report' | 'insight' | 'news';
+
+export type ContentCategoryOption = {
+    id: number;
+    slug: string;
+    name_en: string;
+    name_ar: string;
+};
+
+export type ContentCategoryListItem = ContentCategoryOption & {
+    description_en: string | null;
+    description_ar: string | null;
+    insights_count: number;
+    created_at: string | null;
+    updated_at: string | null;
+};
+
+export type InsightCategorySummary = ContentCategoryOption;
+
+export type InsightListItem = {
+    id: number;
+    type: InsightType;
+    title_en: string;
+    title_ar: string;
+    slug: string;
+    status: ContentStatus;
+    is_featured: boolean;
+    published_at: string | null;
+    cover_image_url: string | null;
+    has_report_attachment: boolean;
+    categories: InsightCategorySummary[];
+    author: {
+        id: number;
+        name: string;
+    } | null;
+    created_at: string | null;
+    updated_at: string | null;
+    deleted_at: string | null;
+};
+
+export type InsightDetail = InsightListItem & {
+    excerpt_en: string | null;
+    excerpt_ar: string | null;
+    body_en: string | null;
+    body_ar: string | null;
+    category_ids: number[];
+    seo_title_en: string | null;
+    seo_title_ar: string | null;
+    seo_description_en: string | null;
+    seo_description_ar: string | null;
+};
+
 export type InquiryListItem = {
     id: number;
     name: string;

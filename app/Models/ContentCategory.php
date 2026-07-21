@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -21,5 +22,14 @@ class ContentCategory extends Model
     public function insights(): BelongsToMany
     {
         return $this->belongsToMany(Insight::class);
+    }
+
+    /**
+     * @param  Builder<ContentCategory>  $query
+     * @return Builder<ContentCategory>
+     */
+    public function scopeOrdered(Builder $query): Builder
+    {
+        return $query->orderBy('name_en')->orderBy('name_ar');
     }
 }

@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\ContentCategory;
 use App\Models\Inquiry;
 use App\Models\Industry;
+use App\Models\Insight;
 use App\Models\StudyRequest;
 use App\Models\Service;
+use App\Policies\ContentCategoryPolicy;
 use App\Policies\InquiryPolicy;
 use App\Policies\IndustryPolicy;
+use App\Policies\InsightPolicy;
 use App\Policies\StudyRequestPolicy;
 use App\Policies\ServicePolicy;
 use Carbon\CarbonImmutable;
@@ -49,6 +53,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(StudyRequest::class, StudyRequestPolicy::class);
         Gate::policy(Service::class, ServicePolicy::class);
         Gate::policy(Industry::class, IndustryPolicy::class);
+        Gate::policy(ContentCategory::class, ContentCategoryPolicy::class);
+        Gate::policy(Insight::class, InsightPolicy::class);
 
         RateLimiter::for('admin-actions', function (Request $request) {
             return Limit::perMinute(90)->by((string) ($request->user()?->id ?? $request->ip()));
