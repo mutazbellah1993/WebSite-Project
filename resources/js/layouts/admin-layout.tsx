@@ -1,8 +1,9 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BarChart3, ClipboardList, LayoutDashboard, Menu, X } from 'lucide-react';
+import { BarChart3, ClipboardList, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 import { useState, type PropsWithChildren } from 'react';
 import { InertiaAwareProviders } from '@/components/app-providers';
 import { cn } from '@/lib/utils';
+import { logout } from '@/routes';
 import type { SharedPageProps } from '@/types';
 
 type AdminPageProps = SharedPageProps & {
@@ -76,6 +77,16 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                 <p className="font-bold text-white">{user?.name}</p>
                 <p className="mt-1 break-all">{user?.email}</p>
                 {user?.role ? <p className="mt-2 text-xs uppercase text-[#22C7CF]">{user.role.replace('_', ' ')}</p> : null}
+                <Link
+                    href={logout()}
+                    method="post"
+                    as="button"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#0AA6B5] px-3 py-2.5 text-sm font-bold text-white transition hover:bg-[#22C7CF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22C7CF]"
+                    data-test="admin-logout-button"
+                >
+                    <LogOut className="size-4" aria-hidden="true" />
+                    <span>{locale === 'ar' ? 'تسجيل الخروج' : 'Log out'}</span>
+                </Link>
             </div>
         </aside>
     );

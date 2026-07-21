@@ -21,7 +21,10 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'role' => 'admin',
+            'is_active' => true,
+        ]);
 
         $response = $this->post(route('login.store'), [
             'email' => $user->email,
@@ -29,7 +32,19 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('admin.dashboard', absolute: false));
+    }
+
+    public function test_authenticated_users_are_redirected_from_login_to_admin_dashboard()
+    {
+        $user = User::factory()->create([
+            'role' => 'admin',
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($user)
+            ->get(route('login'))
+            ->assertRedirect(route('admin.dashboard'));
     }
 
     public function test_users_with_two_factor_enabled_are_redirected_to_two_factor_challenge()
@@ -71,7 +86,7 @@ class AuthenticationTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('logout'));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('login'));
 
         $this->assertGuest();
     }

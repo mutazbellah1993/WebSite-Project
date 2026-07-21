@@ -16,8 +16,8 @@ Route::post('/request-a-study', [PublicLeadController::class, 'storeStudyRequest
 Route::inertia('/contact-us', 'public/contact')->name('contact');
 Route::post('/contact-us', [PublicLeadController::class, 'storeContactMessage'])->name('contact.submit');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+Route::middleware(['auth', 'verified', 'admin.access'])->group(function () {
+    Route::get('dashboard', fn () => redirect()->route('admin.dashboard'))->name('dashboard');
 });
 
 Route::middleware(['auth', 'verified', 'admin.access'])
