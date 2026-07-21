@@ -44,6 +44,8 @@ class User extends Authenticatable implements PasskeyUser
 
     public const LEAD_MANAGER_ROLES = ['super_admin', 'admin', 'editor'];
 
+    public const CONTENT_MANAGER_ROLES = ['super_admin', 'admin', 'editor'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -84,6 +86,11 @@ class User extends Authenticatable implements PasskeyUser
     public function canManageLeads(): bool
     {
         return $this->is_active && in_array($this->role, self::LEAD_MANAGER_ROLES, true);
+    }
+
+    public function canManageContent(): bool
+    {
+        return $this->is_active && in_array($this->role, self::CONTENT_MANAGER_ROLES, true);
     }
 
     /**

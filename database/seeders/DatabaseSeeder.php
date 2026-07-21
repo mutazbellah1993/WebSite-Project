@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SiteSettingSeeder::class,
+            ServiceIndustrySeeder::class,
         ]);
     }
 }

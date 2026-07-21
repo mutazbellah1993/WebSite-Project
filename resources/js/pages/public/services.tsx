@@ -5,7 +5,8 @@ import { PageHero } from '@/components/public/page-hero';
 import { SectionHeading } from '@/components/public/section-heading';
 import { SeoHead } from '@/components/public/seo-head';
 import { ServiceCard } from '@/components/public/service-card';
-import { services, text } from '@/lib/public-content';
+import { services as staticServices, text } from '@/lib/public-content';
+import type { ServiceItem } from '@/lib/public-content';
 import type { SharedPageProps } from '@/types';
 
 const delivery = [
@@ -15,9 +16,15 @@ const delivery = [
     { en: 'Reports, dashboards, and presentation materials', ar: 'تقارير ولوحات بيانات ومواد عرض' },
 ];
 
-export default function Services() {
+type Props = {
+    services: ServiceItem[];
+    hasPublishedServices: boolean;
+};
+
+export default function Services({ services, hasPublishedServices }: Props) {
     const { locale } = usePage<SharedPageProps>().props;
     const currentLocale = locale.current;
+    const displayedServices = hasPublishedServices ? services : staticServices;
 
     return (
         <>
@@ -49,7 +56,7 @@ export default function Services() {
                         title={{ en: 'Specialized research and analytics services', ar: 'خدمات متخصصة في البحث والتحليل' }}
                     />
                     <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                        {services.map((service) => (
+                        {displayedServices.map((service) => (
                             <ServiceCard key={service.key} service={service} locale={currentLocale} />
                         ))}
                     </div>

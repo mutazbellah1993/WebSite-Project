@@ -6,12 +6,22 @@ import { PageHero } from '@/components/public/page-hero';
 import { SectionHeading } from '@/components/public/section-heading';
 import { SeoHead } from '@/components/public/seo-head';
 import { ServiceCard } from '@/components/public/service-card';
-import { industries, methodology, services, text } from '@/lib/public-content';
+import { industries as staticIndustries, methodology, services as staticServices, text } from '@/lib/public-content';
+import type { IndustryItem, ServiceItem } from '@/lib/public-content';
 import type { SharedPageProps } from '@/types';
 
-export default function Home() {
+type Props = {
+    services: ServiceItem[];
+    industries: IndustryItem[];
+    hasPublishedServices: boolean;
+    hasPublishedIndustries: boolean;
+};
+
+export default function Home({ services, industries, hasPublishedServices, hasPublishedIndustries }: Props) {
     const { locale } = usePage<SharedPageProps>().props;
     const currentLocale = locale.current;
+    const displayedServices = hasPublishedServices ? services : staticServices.slice(0, 6);
+    const displayedIndustries = hasPublishedIndustries ? industries : staticIndustries;
 
     return (
         <>
@@ -52,7 +62,7 @@ export default function Home() {
                         }}
                     />
                     <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                        {services.slice(0, 6).map((service) => (
+                        {displayedServices.map((service) => (
                             <ServiceCard key={service.key} service={service} locale={currentLocale} />
                         ))}
                     </div>
@@ -102,7 +112,7 @@ export default function Home() {
                         }}
                     />
                     <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {industries.map((industry) => (
+                        {displayedIndustries.map((industry) => (
                             <article key={industry.title.en} className="rounded-lg bg-[#F4F7FA] p-6 ring-1 ring-[#D8E2EC]">
                                 <h3 className="font-bold text-[#0F172A]">{text(industry.title, currentLocale)}</h3>
                                 <p className="mt-3 text-sm font-normal leading-6 text-[#475569]">{text(industry.description, currentLocale)}</p>

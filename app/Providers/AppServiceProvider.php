@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Inquiry;
+use App\Models\Industry;
 use App\Models\StudyRequest;
+use App\Models\Service;
 use App\Policies\InquiryPolicy;
+use App\Policies\IndustryPolicy;
 use App\Policies\StudyRequestPolicy;
+use App\Policies\ServicePolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -43,6 +47,8 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::policy(Inquiry::class, InquiryPolicy::class);
         Gate::policy(StudyRequest::class, StudyRequestPolicy::class);
+        Gate::policy(Service::class, ServicePolicy::class);
+        Gate::policy(Industry::class, IndustryPolicy::class);
 
         RateLimiter::for('admin-actions', function (Request $request) {
             return Limit::perMinute(90)->by((string) ($request->user()?->id ?? $request->ip()));

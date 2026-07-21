@@ -9,11 +9,14 @@ export type NavigationItem = {
 
 export type ServiceItem = {
     key: string;
+    slug?: string;
     title: LocalizedText;
     description: LocalizedText;
 };
 
 export type IndustryItem = {
+    slug?: string;
+    icon?: string | null;
     title: LocalizedText;
     description: LocalizedText;
 };

@@ -31,6 +31,8 @@ export type StudyRequestStatus =
     | 'rejected'
     | 'closed';
 
+export type ContentStatus = 'draft' | 'published' | 'archived';
+
 export type InquiryListItem = {
     id: number;
     name: string;
@@ -43,6 +45,51 @@ export type InquiryListItem = {
     assignee: AdminAssignee | null;
     created_at: string | null;
     deleted_at: string | null;
+};
+
+export type ServiceListItem = {
+    id: number;
+    title_en: string;
+    title_ar: string;
+    slug: string;
+    short_description_en: string | null;
+    short_description_ar: string | null;
+    icon: string | null;
+    image_path: string | null;
+    status: ContentStatus;
+    is_featured: boolean;
+    sort_order: number;
+    created_at: string | null;
+    updated_at: string | null;
+    deleted_at: string | null;
+};
+
+export type ServiceDetail = ServiceListItem & {
+    description_en: string | null;
+    description_ar: string | null;
+    seo_title_en: string | null;
+    seo_title_ar: string | null;
+    seo_description_en: string | null;
+    seo_description_ar: string | null;
+};
+
+export type IndustryListItem = {
+    id: number;
+    title_en: string;
+    title_ar: string;
+    slug: string;
+    icon: string | null;
+    image_path: string | null;
+    status: ContentStatus;
+    sort_order: number;
+    created_at: string | null;
+    updated_at: string | null;
+    deleted_at: string | null;
+};
+
+export type IndustryDetail = IndustryListItem & {
+    description_en: string | null;
+    description_ar: string | null;
 };
 
 export type InquiryDetail = InquiryListItem & {

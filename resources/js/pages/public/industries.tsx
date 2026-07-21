@@ -4,14 +4,21 @@ import { CtaBand } from '@/components/public/cta-band';
 import { PageHero } from '@/components/public/page-hero';
 import { SectionHeading } from '@/components/public/section-heading';
 import { SeoHead } from '@/components/public/seo-head';
-import { industries, text } from '@/lib/public-content';
+import { industries as staticIndustries, text } from '@/lib/public-content';
+import type { IndustryItem } from '@/lib/public-content';
 import type { SharedPageProps } from '@/types';
 
 const icons = [UsersRound, Building2, GraduationCap, Landmark, LineChart, HeartPulse];
 
-export default function Industries() {
+type Props = {
+    industries: IndustryItem[];
+    hasPublishedIndustries: boolean;
+};
+
+export default function Industries({ industries, hasPublishedIndustries }: Props) {
     const { locale } = usePage<SharedPageProps>().props;
     const currentLocale = locale.current;
+    const displayedIndustries = hasPublishedIndustries ? industries : staticIndustries;
 
     return (
         <>
@@ -43,7 +50,7 @@ export default function Industries() {
                         title={{ en: 'Research for programs, markets, and institutions', ar: 'بحث للبرامج والأسواق والمؤسسات' }}
                     />
                     <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                        {industries.map((industry, index) => {
+                        {displayedIndustries.map((industry, index) => {
                             const Icon = icons[index] ?? Building2;
 
                             return (

@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BarChart3, ClipboardList, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
+import { BarChart3, BriefcaseBusiness, Building2, ClipboardList, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 import { useState, type PropsWithChildren } from 'react';
 import { InertiaAwareProviders } from '@/components/app-providers';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,8 @@ type AdminPageProps = SharedPageProps & {
 };
 
 const navItems = [
+    { href: '/admin/services', label: { en: 'Services', ar: 'الخدمات' }, icon: BriefcaseBusiness },
+    { href: '/admin/industries', label: { en: 'Industries', ar: 'القطاعات' }, icon: Building2 },
     { href: '/admin', label: { en: 'Overview', ar: 'نظرة عامة' }, icon: LayoutDashboard },
     { href: '/admin/inquiries', label: { en: 'Contact Inquiries', ar: 'استفسارات التواصل' }, icon: ClipboardList },
     { href: '/admin/study-requests', label: { en: 'Study Requests', ar: 'طلبات الدراسات' }, icon: BarChart3 },
