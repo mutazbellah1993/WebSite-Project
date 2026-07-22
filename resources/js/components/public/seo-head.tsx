@@ -1,7 +1,7 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import type { LocalizedText } from '@/lib/public-content';
 import { text } from '@/lib/public-content';
-import type { LocaleCode } from '@/types';
+import type { LocaleCode, SharedPageProps } from '@/types';
 
 type SeoHeadProps = {
     title: LocalizedText;
@@ -28,14 +28,18 @@ export function SeoHead({
     structuredData,
     noindex = false,
 }: SeoHeadProps) {
+    const page = usePage<SharedPageProps>();
     const localizedTitle = text(title, locale);
     const localizedDescription = text(description, locale);
+    const defaultCanonicalUrl = `${page.props.appUrl}${page.url.split('?')[0]}`;
+    const resolvedCanonicalUrl = canonicalUrl ?? defaultCanonicalUrl;
+    const resolvedImageUrl = imageUrl ?? `${page.props.appUrl}/brand/elitedata-official-logo.png`;
 
     return (
         <Head title={localizedTitle}>
             <meta name="description" content={localizedDescription} />
             {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
-            {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+            <link rel="canonical" href={resolvedCanonicalUrl} />
             {alternateUrls
                 ? Object.entries(alternateUrls).map(([language, href]) =>
                       href ? <link key={language} rel="alternate" hrefLang={language} href={href} /> : null,
@@ -44,11 +48,11 @@ export function SeoHead({
             <meta property="og:title" content={`${localizedTitle} - ELITEDATA`} />
             <meta property="og:description" content={localizedDescription} />
             <meta property="og:type" content={ogType} />
-            {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
-            {imageUrl ? <meta property="og:image" content={imageUrl} /> : null}
+            <meta property="og:url" content={resolvedCanonicalUrl} />
+            <meta property="og:image" content={resolvedImageUrl} />
             {publishedTime ? <meta property="article:published_time" content={publishedTime} /> : null}
-            <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
-            {imageUrl ? <meta name="twitter:image" content={imageUrl} /> : null}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:image" content={resolvedImageUrl} />
             {structuredData ? <script type="application/ld+json">{JSON.stringify(structuredData)}</script> : null}
         </Head>
     );

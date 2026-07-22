@@ -27,6 +27,10 @@ return [
         ],
     ],
 
+    'notifications' => [
+        'leads_to' => env('ELITEDATA_LEADS_NOTIFICATION_EMAIL'),
+    ],
+
     'services' => [
         'statistical_studies',
         'survey_design',

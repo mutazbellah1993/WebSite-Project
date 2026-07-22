@@ -60,6 +60,10 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(90)->by((string) ($request->user()?->id ?? $request->ip()));
         });
 
+        RateLimiter::for('public-leads', function (Request $request) {
+            return Limit::perMinute(12)->by((string) $request->ip());
+        });
+
         DB::prohibitDestructiveCommands(
             app()->isProduction(),
         );

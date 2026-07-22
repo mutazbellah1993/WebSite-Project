@@ -23,6 +23,7 @@ export type BrandContext = {
 
 export type SharedPageProps = {
     name: string;
+    appUrl: string;
     brand: BrandContext;
     locale: LocaleContext;
     sidebarOpen: boolean;

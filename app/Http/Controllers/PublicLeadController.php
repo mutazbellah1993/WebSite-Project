@@ -6,9 +6,15 @@ use App\Http\Requests\StoreContactMessageRequest;
 use App\Http\Requests\StoreStudyRequest;
 use App\Models\Inquiry;
 use App\Models\StudyRequest;
+use App\Notifications\PublicInquiryReceived;
+use App\Notifications\StudyRequestReceived;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification as NotificationFacade;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Throwable;
 
 class PublicLeadController extends Controller
 {
@@ -16,12 +22,14 @@ class PublicLeadController extends Controller
     {
         $data = $request->safe()->except(['consent', 'website']);
 
-        StudyRequest::create([
+        $studyRequest = StudyRequest::create([
             ...$data,
             'request_number' => $this->generateStudyRequestNumber(),
             'status' => 'new',
             'preferred_language' => app()->getLocale(),
         ]);
+
+        $this->notifyCompany(new StudyRequestReceived($studyRequest));
 
         Inertia::flash('toast', [
             'type' => 'success',
@@ -35,7 +43,7 @@ class PublicLeadController extends Controller
     {
         $data = $request->safe()->except(['consent', 'website']);
 
-        Inquiry::create([
+        $inquiry = Inquiry::create([
             ...$data,
             'status' => 'new',
             'preferred_language' => app()->getLocale(),
@@ -43,6 +51,8 @@ class PublicLeadController extends Controller
             'ip_address' => $request->ip(),
             'user_agent' => Str::limit((string) $request->userAgent(), 1000, ''),
         ]);
+
+        $this->notifyCompany(new PublicInquiryReceived($inquiry));
 
         Inertia::flash('toast', [
             'type' => 'success',
@@ -59,5 +69,23 @@ class PublicLeadController extends Controller
         } while (StudyRequest::query()->where('request_number', $requestNumber)->exists());
 
         return $requestNumber;
+    }
+
+    private function notifyCompany(Notification $notification): void
+    {
+        $recipient = config('elitedata.notifications.leads_to');
+
+        if (! is_string($recipient) || trim($recipient) === '') {
+            return;
+        }
+
+        try {
+            NotificationFacade::route('mail', $recipient)->notify($notification);
+        } catch (Throwable $exception) {
+            Log::warning('Lead notification email failed.', [
+                'notification' => $notification::class,
+                'message' => $exception->getMessage(),
+            ]);
+        }
     }
 }

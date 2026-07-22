@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /login
+Disallow: /settings
+Disallow: /user
+Allow: /
+
+Sitemap: https://elitedata.pro/sitemap.xml

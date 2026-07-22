@@ -55,7 +55,15 @@ export function SiteFooter() {
             </div>
             <div className="border-t border-white/10">
                 <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-5 text-sm text-[#B8C7D9] sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-                    <p>ELITEDATA</p>
+                    <div className="flex flex-wrap items-center gap-4">
+                        <p>ELITEDATA</p>
+                        <Link href="/privacy-policy" className="transition hover:text-[#22C7CF]">
+                            {currentLocale === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+                        </Link>
+                        <Link href="/terms-of-use" className="transition hover:text-[#22C7CF]">
+                            {currentLocale === 'ar' ? 'شروط الاستخدام' : 'Terms of Use'}
+                        </Link>
+                    </div>
                     <p>
                         {currentLocale === 'ar'
                             ? 'تم إعداد الموقع لدعم العربية والإنجليزية.'

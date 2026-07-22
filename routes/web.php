@@ -7,11 +7,16 @@ use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\InsightController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StudyRequestController;
+use App\Http\Controllers\DashboardRedirectController;
 use App\Http\Controllers\PublicContentController;
 use App\Http\Controllers\PublicInsightController;
 use App\Http\Controllers\PublicLeadController;
+use App\Http\Controllers\RobotsController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/robots.txt', RobotsController::class)->name('robots');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/', [PublicContentController::class, 'home'])->name('home');
 Route::inertia('/about-us', 'public/about')->name('about');
 Route::get('/services', [PublicContentController::class, 'services'])->name('services');
@@ -20,12 +25,18 @@ Route::get('/research-and-insights', [PublicInsightController::class, 'index'])-
 Route::get('/research-and-insights/{insight:slug}/download', [PublicInsightController::class, 'download'])->name('insights.download');
 Route::get('/research-and-insights/{insight:slug}', [PublicInsightController::class, 'show'])->name('insights.show');
 Route::inertia('/request-a-study', 'public/request-study')->name('request-study');
-Route::post('/request-a-study', [PublicLeadController::class, 'storeStudyRequest'])->name('request-study.submit');
+Route::post('/request-a-study', [PublicLeadController::class, 'storeStudyRequest'])
+    ->middleware('throttle:public-leads')
+    ->name('request-study.submit');
 Route::inertia('/contact-us', 'public/contact')->name('contact');
-Route::post('/contact-us', [PublicLeadController::class, 'storeContactMessage'])->name('contact.submit');
+Route::post('/contact-us', [PublicLeadController::class, 'storeContactMessage'])
+    ->middleware('throttle:public-leads')
+    ->name('contact.submit');
+Route::inertia('/privacy-policy', 'public/privacy')->name('privacy');
+Route::inertia('/terms-of-use', 'public/terms')->name('terms');
 
 Route::middleware(['auth', 'verified', 'admin.access'])->group(function () {
-    Route::get('dashboard', fn () => redirect()->route('admin.dashboard'))->name('dashboard');
+    Route::get('dashboard', DashboardRedirectController::class)->name('dashboard');
 });
 
 Route::middleware(['auth', 'verified', 'admin.access'])

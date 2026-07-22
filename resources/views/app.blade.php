@@ -2,6 +2,15 @@
 @php
     $supportedLocales = config('elitedata.locales.supported', []);
     $direction = $supportedLocales[app()->getLocale()]['direction'] ?? 'ltr';
+    $appUrl = rtrim(config('app.url'), '/');
+    $organizationJson = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => config('elitedata.brand.name', 'ELITEDATA'),
+        'url' => $appUrl,
+        'logo' => $appUrl.'/brand/elitedata-official-logo.png',
+        'description' => 'Research, Statistics & Data Analytics',
+    ];
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $direction }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
     <head>
@@ -37,6 +46,7 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <script type="application/ld+json">@json($organizationJson, JSON_UNESCAPED_SLASHES)</script>
 
         @fonts
 

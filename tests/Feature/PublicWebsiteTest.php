@@ -4,7 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Inquiry;
 use App\Models\StudyRequest;
+use App\Notifications\PublicInquiryReceived;
+use App\Notifications\StudyRequestReceived;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class PublicWebsiteTest extends TestCase
@@ -21,6 +24,8 @@ class PublicWebsiteTest extends TestCase
             route('insights'),
             route('request-study'),
             route('contact'),
+            route('privacy'),
+            route('terms'),
         ];
 
         foreach ($routes as $route) {
@@ -37,6 +42,9 @@ class PublicWebsiteTest extends TestCase
 
     public function test_study_request_can_be_submitted(): void
     {
+        Notification::fake();
+        config(['elitedata.notifications.leads_to' => 'leads@example.test']);
+
         $this->withCookie('locale', 'en')->post(route('request-study.submit'), [
             'organization' => 'Research Organization',
             'full_name' => 'Analyst Name',
@@ -65,10 +73,14 @@ class PublicWebsiteTest extends TestCase
         ]);
 
         $this->assertNotNull(StudyRequest::query()->first()?->request_number);
+        Notification::assertSentOnDemand(StudyRequestReceived::class);
     }
 
     public function test_contact_message_can_be_submitted(): void
     {
+        Notification::fake();
+        config(['elitedata.notifications.leads_to' => 'leads@example.test']);
+
         $this->withCookie('locale', 'en')->post(route('contact.submit'), [
             'name' => 'Contact Person',
             'email' => 'contact@example.test',
@@ -87,5 +99,20 @@ class PublicWebsiteTest extends TestCase
         ]);
 
         $this->assertSame('Contact Person', Inquiry::query()->first()?->name);
+        Notification::assertSentOnDemand(PublicInquiryReceived::class);
+    }
+
+    public function test_public_form_honeypot_rejects_bot_submissions(): void
+    {
+        $this->post(route('contact.submit'), [
+            'name' => 'Contact Person',
+            'email' => 'contact@example.test',
+            'subject' => 'general-inquiry',
+            'message' => 'We would like to discuss research and analytics support.',
+            'consent' => '1',
+            'website' => 'https://spam.example',
+        ])->assertSessionHasErrors('website');
+
+        $this->assertDatabaseCount('inquiries', 0);
     }
 }
