@@ -55,7 +55,7 @@ export function PageHero({
             <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-24">
                 <div className="flex flex-col justify-center">
                     {eyebrow ? (
-                        <p className="mb-5 text-sm font-bold uppercase text-[#22C7CF]">
+                        <p className="mb-5 text-base font-bold uppercase tracking-normal text-white md:text-lg">
                             {text(eyebrow, locale)}
                         </p>
                     ) : null}
