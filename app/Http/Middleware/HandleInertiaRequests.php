@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'appUrl' => rtrim((string) config('app.url'), '/'),
             'brand' => config('elitedata.brand'),
+            'contact' => config('elitedata.contact'),
             'locale' => [
                 'current' => $locale,
                 'fallback' => config('elitedata.locales.fallback', 'en'),

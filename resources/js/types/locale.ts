@@ -21,10 +21,21 @@ export type BrandContext = {
     tagline: Record<LocaleCode, string>;
 };
 
+export type ContactContext = {
+    website: string;
+    email: string;
+    email_href: string;
+    phone: string;
+    phone_href: string;
+    whatsapp_url: string;
+    linkedin_url: string;
+};
+
 export type SharedPageProps = {
     name: string;
     appUrl: string;
     brand: BrandContext;
+    contact: ContactContext;
     locale: LocaleContext;
     sidebarOpen: boolean;
 };

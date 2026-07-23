@@ -3,13 +3,29 @@
     $supportedLocales = config('elitedata.locales.supported', []);
     $direction = $supportedLocales[app()->getLocale()]['direction'] ?? 'ltr';
     $appUrl = rtrim(config('app.url'), '/');
+    $contact = config('elitedata.contact', []);
+    $organizationUrl = rtrim((string) ($contact['website'] ?? $appUrl), '/');
     $organizationJson = [
         '@context' => 'https://schema.org',
         '@type' => 'Organization',
         'name' => config('elitedata.brand.name', 'ELITEDATA'),
-        'url' => $appUrl,
-        'logo' => $appUrl.'/brand/elitedata-official-logo.png',
+        'url' => $organizationUrl,
+        'logo' => $organizationUrl.'/brand/elitedata-official-logo.png',
         'description' => 'Research, Statistics & Data Analytics',
+        'email' => $contact['email'] ?? null,
+        'telephone' => $contact['phone'] ?? null,
+        'sameAs' => array_values(array_filter([
+            $contact['linkedin_url'] ?? null,
+        ])),
+        'contactPoint' => [
+            [
+                '@type' => 'ContactPoint',
+                'contactType' => 'customer support',
+                'email' => $contact['email'] ?? null,
+                'telephone' => $contact['phone'] ?? null,
+                'availableLanguage' => ['English', 'Arabic'],
+            ],
+        ],
     ];
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $direction }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>

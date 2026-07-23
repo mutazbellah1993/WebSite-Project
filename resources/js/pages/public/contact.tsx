@@ -1,5 +1,5 @@
 import { useForm, usePage } from '@inertiajs/react';
-import { MailCheck, Send } from 'lucide-react';
+import { Globe2, Linkedin, Mail, MailCheck, MessageCircle, Phone, Send } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { SelectField, TextareaField, TextField } from '@/components/public/form-fields';
 import { PageHero } from '@/components/public/page-hero';
@@ -20,7 +20,7 @@ type ContactForm = {
 };
 
 export default function Contact() {
-    const { locale } = usePage<SharedPageProps>().props;
+    const { contact, locale } = usePage<SharedPageProps>().props;
     const currentLocale = locale.current;
     const form = useForm<ContactForm>({
         name: '',
@@ -78,11 +78,49 @@ export default function Contact() {
                         />
                         <div className="mt-8 rounded-lg bg-[#F4F7FA] p-6 ring-1 ring-[#D8E2EC]">
                             <MailCheck className="mb-4 size-7 text-[#0AA6B5]" aria-hidden="true" />
-                            <p className="text-sm font-normal leading-6 text-[#475569]">
-                                {currentLocale === 'ar'
-                                    ? 'يمكن إضافة البريد الرسمي ورقم الهاتف وعنوان المكتب بعد تأكيد بيانات الاتصال النهائية قبل الإطلاق.'
-                                    : 'Official email, phone number, and office address can be added after final contact details are confirmed before launch.'}
-                            </p>
+                            <div className="space-y-3 text-sm font-medium leading-6 text-[#475569]">
+                                <a className="flex items-center gap-2 transition hover:text-[#0AA6B5]" href={contact.email_href}>
+                                    <Mail className="size-4 shrink-0" aria-hidden="true" />
+                                    <span>
+                                        {currentLocale === 'ar' ? 'البريد الإلكتروني' : 'Email'}:{' '}
+                                        <span dir="ltr">{contact.email}</span>
+                                    </span>
+                                </a>
+                                <a className="flex items-center gap-2 transition hover:text-[#0AA6B5]" href={contact.phone_href}>
+                                    <Phone className="size-4 shrink-0" aria-hidden="true" />
+                                    <span>
+                                        {currentLocale === 'ar' ? 'الهاتف / واتساب' : 'Phone / WhatsApp'}:{' '}
+                                        <span dir="ltr">{contact.phone}</span>
+                                    </span>
+                                </a>
+                                <a
+                                    className="flex items-center gap-2 transition hover:text-[#0AA6B5]"
+                                    href={contact.whatsapp_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
+                                    <span>{currentLocale === 'ar' ? 'راسلنا عبر واتساب' : 'Message us on WhatsApp'}</span>
+                                </a>
+                                <a
+                                    className="flex items-center gap-2 transition hover:text-[#0AA6B5]"
+                                    href={contact.linkedin_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <Linkedin className="size-4 shrink-0" aria-hidden="true" />
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a
+                                    className="flex items-center gap-2 transition hover:text-[#0AA6B5]"
+                                    href={contact.website}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <Globe2 className="size-4 shrink-0" aria-hidden="true" />
+                                    <span dir="ltr">{contact.website}</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <form onSubmit={submit} className="rounded-lg border border-[#D8E2EC] bg-[#F4F7FA] p-6 shadow-sm">

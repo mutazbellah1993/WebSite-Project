@@ -1,11 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Globe2, Linkedin, Mail, MessageCircle, Phone } from 'lucide-react';
 import { BrandLogo } from '@/components/public/brand-logo';
 import { navItems, services, text } from '@/lib/public-content';
 import type { SharedPageProps } from '@/types';
 
 export function SiteFooter() {
-    const { locale } = usePage<SharedPageProps>().props;
+    const { contact, locale } = usePage<SharedPageProps>().props;
     const currentLocale = locale.current;
 
     return (
@@ -18,6 +18,53 @@ export function SiteFooter() {
                             ? 'إيليت داتا شركة بحث إحصائي وتحليل بيانات تساعد المؤسسات على تحويل البيانات إلى قرارات واضحة.'
                             : 'EliteData is a research, statistics, and data analytics company helping organizations turn data into clear decisions.'}
                     </p>
+                    <ul className="mt-6 space-y-3 text-sm font-medium text-[#D7E4F2]">
+                        <li>
+                            <a className="flex items-center gap-2 transition hover:text-[#22C7CF]" href={contact.email_href}>
+                                <Mail className="size-4 shrink-0" aria-hidden="true" />
+                                <span dir="ltr">{contact.email}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a className="flex items-center gap-2 transition hover:text-[#22C7CF]" href={contact.phone_href}>
+                                <Phone className="size-4 shrink-0" aria-hidden="true" />
+                                <span dir="ltr">{contact.phone}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                className="flex items-center gap-2 transition hover:text-[#22C7CF]"
+                                href={contact.whatsapp_url}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <MessageCircle className="size-4 shrink-0" aria-hidden="true" />
+                                <span>{currentLocale === 'ar' ? 'واتساب' : 'WhatsApp'}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                className="flex items-center gap-2 transition hover:text-[#22C7CF]"
+                                href={contact.linkedin_url}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <Linkedin className="size-4 shrink-0" aria-hidden="true" />
+                                <span>LinkedIn</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                className="flex items-center gap-2 transition hover:text-[#22C7CF]"
+                                href={contact.website}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <Globe2 className="size-4 shrink-0" aria-hidden="true" />
+                                <span dir="ltr">{contact.website}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <nav aria-label="Footer navigation">
                     <h2 className="text-sm font-bold uppercase text-[#22C7CF]">

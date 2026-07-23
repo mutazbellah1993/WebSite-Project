@@ -31,6 +31,16 @@ return [
         'leads_to' => env('ELITEDATA_LEADS_NOTIFICATION_EMAIL'),
     ],
 
+    'contact' => [
+        'website' => 'https://elitedata.pro',
+        'email' => 'info@elitedata.pro',
+        'email_href' => 'mailto:info@elitedata.pro',
+        'phone' => '+963 940 588 079',
+        'phone_href' => 'tel:+963940588079',
+        'whatsapp_url' => 'https://wa.me/963940588079',
+        'linkedin_url' => 'https://linkedin.com/company/elitedata-pro',
+    ],
+
     'services' => [
         'statistical_studies',
         'survey_design',
