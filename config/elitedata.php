@@ -41,6 +41,11 @@ return [
         'linkedin_url' => 'https://linkedin.com/company/elitedata-pro',
     ],
 
+    'projects' => [
+        // Public address of the standalone Syria humanitarian dashboard (a Node app on its own subdomain).
+        'syria_dashboard_url' => env('ELITEDATA_SYRIA_DASHBOARD_URL'),
+    ],
+
     'services' => [
         'statistical_studies',
         'survey_design',

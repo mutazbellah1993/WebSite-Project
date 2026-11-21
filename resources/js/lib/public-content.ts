@@ -34,6 +34,7 @@ export const navItems: NavigationItem[] = [
     { href: '/services', label: { en: 'Services', ar: 'الخدمات' } },
     { href: '/industries', label: { en: 'Industries', ar: 'القطاعات' } },
     { href: '/research-and-insights', label: { en: 'Research & Insights', ar: 'الأبحاث والرؤى' } },
+    { href: '/projects', label: { en: 'Projects', ar: 'المشاريع التحليلية' } },
     { href: '/request-a-study', label: { en: 'Request a Study', ar: 'طلب دراسة' } },
     { href: '/contact-us', label: { en: 'Contact Us', ar: 'اتصل بنا' } },
 ];

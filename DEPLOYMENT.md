@@ -120,6 +120,7 @@ Check:
 - `/services`
 - `/industries`
 - `/research-and-insights`
+- `/projects`
 - `/request-a-study`
 - `/contact-us`
 - `/privacy-policy`
@@ -130,3 +131,21 @@ Check:
 - `/admin`
 
 Then submit one test contact inquiry and one test study request, confirm records appear in `/admin`, confirm notification email delivery, and remove the test records if needed.
+
+## Analytical Projects (Syria humanitarian dashboard)
+
+The `/projects` section lists published records of the `case_studies` table. The first project is the Syria humanitarian situation dashboard. The interactive dashboard itself is a separate Node application on its own subdomain (see that project's DEPLOY.md), and the project page links to it.
+
+1. Deploy the dashboard first and note its public address, for example `https://dashboards.elitedata.pro`.
+2. In the production `.env` set `ELITEDATA_SYRIA_DASHBOARD_URL=https://dashboards.elitedata.pro`, then run `php artisan config:cache`.
+3. After a database backup, run the migration that adds `case_studies.live_url` and publish the project:
+
+```bash
+php artisan migrate --force
+php artisan db:seed --class=AnalyticalProjectSeeder --force
+```
+
+The seeder is repeatable: it updates the record with slug `syria-humanitarian-dashboard`, keeps its original publish date, and stores the dashboard address from the environment. If the address changes later, set the variable and run the seeder again. Without an address the page is published without the "Open the live dashboard" button.
+
+4. The cover image ships in `public/images/projects/`; upload the full `public` directory with the build.
+5. Verify `/projects` and `/projects/syria-humanitarian-dashboard` in English and Arabic, and that the button opens the dashboard in the same language.
