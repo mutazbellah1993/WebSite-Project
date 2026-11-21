@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardRedirectController;
 use App\Http\Controllers\PublicContentController;
 use App\Http\Controllers\PublicInsightController;
 use App\Http\Controllers\PublicLeadController;
+use App\Http\Controllers\PublicProjectController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::get('/industries', [PublicContentController::class, 'industries'])->name(
 Route::get('/research-and-insights', [PublicInsightController::class, 'index'])->name('insights');
 Route::get('/research-and-insights/{insight:slug}/download', [PublicInsightController::class, 'download'])->name('insights.download');
 Route::get('/research-and-insights/{insight:slug}', [PublicInsightController::class, 'show'])->name('insights.show');
+Route::get('/projects', [PublicProjectController::class, 'index'])->name('projects');
+Route::get('/projects/{caseStudy:slug}', [PublicProjectController::class, 'show'])->name('projects.show');
 Route::inertia('/request-a-study', 'public/request-study')->name('request-study');
 Route::post('/request-a-study', [PublicLeadController::class, 'storeStudyRequest'])
     ->middleware('throttle:public-leads')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CaseStudy;
 use App\Models\Insight;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,7 @@ class SitemapController extends Controller
             ['loc' => route('services'), 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['loc' => route('industries'), 'changefreq' => 'weekly', 'priority' => '0.7'],
             ['loc' => route('insights'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+            ['loc' => route('projects'), 'changefreq' => 'weekly', 'priority' => '0.7'],
             ['loc' => route('request-study'), 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['loc' => route('contact'), 'changefreq' => 'monthly', 'priority' => '0.6'],
             ['loc' => route('privacy'), 'changefreq' => 'yearly', 'priority' => '0.3'],
@@ -32,8 +34,19 @@ class SitemapController extends Controller
                 'priority' => '0.6',
             ]);
 
+        $projectUrls = CaseStudy::query()
+            ->published()
+            ->orderByDesc('published_at')
+            ->get(['slug', 'updated_at'])
+            ->map(fn (CaseStudy $project): array => [
+                'loc' => route('projects.show', $project),
+                'lastmod' => $project->updated_at?->toDateString(),
+                'changefreq' => 'monthly',
+                'priority' => '0.6',
+            ]);
+
         $xml = view('sitemap', [
-            'urls' => $urls->merge($insightUrls),
+            'urls' => $urls->merge($insightUrls)->merge($projectUrls),
         ])->render();
 
         return response($xml, 200, ['Content-Type' => 'application/xml; charset=UTF-8']);
