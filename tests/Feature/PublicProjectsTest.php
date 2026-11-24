@@ -98,8 +98,8 @@ class PublicProjectsTest extends TestCase
             ->assertOk()
             ->assertInertia(fn (Assert $page) => $page
                 ->where('project.live_url', 'https://dashboards.example.com')
-                ->where('project.methodology.ar', fn ($html) => str_contains((string) $html, '116'))
-                ->where('project.results.en', fn ($html) => str_contains((string) $html, '116 of those 132')));
+                ->where('project.methodology.ar', fn ($html) => str_contains((string) $html, '275'))
+                ->where('project.results.en', fn ($html) => str_contains((string) $html, 'did not survive new data')));
     }
 
     private function createProject(array $overrides = []): CaseStudy
